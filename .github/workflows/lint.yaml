@@ -28,7 +28,7 @@ jobs:
       frontend: ${{ steps.filter.outputs.frontend }}
       collector: ${{ steps.filter.outputs.collector }}
     steps:
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4.0.3
         id: filter
         with:
           filters: |
@@ -48,11 +48,11 @@ jobs:
     if: needs.changes.outputs.server == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: "24"
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6.1.0
         with:
           path: server/node_modules
           key: ${{ runner.os }}-yarn-server-${{ hashFiles('server/yarn.lock') }}
@@ -66,11 +66,11 @@ jobs:
     if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: "24"
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6.1.0
         with:
           path: frontend/node_modules
           key: ${{ runner.os }}-yarn-frontend-${{ hashFiles('frontend/yarn.lock') }}
@@ -84,11 +84,11 @@ jobs:
     if: needs.changes.outputs.collector == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: "24"
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6.1.0
         with:
           path: collector/node_modules
           key: ${{ runner.os }}-yarn-collector-${{ hashFiles('collector/yarn.lock') }}
